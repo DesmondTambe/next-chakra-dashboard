@@ -9,6 +9,7 @@ import { useDisclosure, UseDisclosureReturn } from "@chakra-ui/hooks";
 import MobileSidebar from "./sidebar/mobile";
 import { useMediaQuery } from "@chakra-ui/media-query";
 import Login from "pages/login";
+import { AuthProvider } from "context/AuthContext";
 
 export const NavContext = createContext<UseDisclosureReturn>(null);
 
@@ -20,7 +21,7 @@ const SiteLayout = ({ children }: any) => {
 
   return (
     <Scroll>
-      {/* {allowed ? ( */}
+      {allowed ? (
         <NavContext.Provider value={sidebarState}>
           <Box textStyle="light">
             <Navbar />
@@ -33,9 +34,9 @@ const SiteLayout = ({ children }: any) => {
             </Box>
           </Box>
         </NavContext.Provider>
-      {/* // ) : (
-      //   <Login />
-      // )} */}
+      ) : (
+        <Login />
+      )}
     </Scroll>
   );
 };

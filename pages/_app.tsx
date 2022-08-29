@@ -3,6 +3,7 @@ import { DefaultSeo } from "next-seo";
 import { LayoutTree } from "@moxy/next-layout";
 import Theme from "theme";
 import SiteLayout from "components/layout";
+import { AuthProvider } from "context/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -45,11 +46,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           cardType: "summary_large_image",
         }}
       />
-      <LayoutTree
-        Component={Component}
-        pageProps={pageProps}
-        defaultLayout={<SiteLayout />}
-      />
+      <AuthProvider>
+        <LayoutTree
+          Component={Component}
+          pageProps={pageProps}
+          defaultLayout={<SiteLayout />}
+        />
+      </AuthProvider>
     </Theme>
   );
 }
