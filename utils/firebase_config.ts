@@ -2,12 +2,12 @@ import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDL-dZddsOgJVnJwyQb3ipngSsJ7Gl5-Cs",
-  authDomain: "ecommerce-b802c.firebaseapp.com",
-  projectId: "ecommerce-b802c",
-  storageBucket: "ecommerce-b802c.appspot.com",
-  messagingSenderId: "960582587645",
-  appId: "1:960582587645:web:f3668fd222a25921379a94",
+  apiKey: process.env.NEXT_APP_FIREBASE_API_KEY,
+  appId: process.env.NEXT_APP_FIREBASE_ID,
+  authDomain: process.env.NEXT_APP_FIREBASE_AUTH_DOMAIN,
+  messagingSenderId: process.env.NEXT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  projectId: process.env.NEXT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_APP_FIREBASE_STORAGE_BUCKET,
 };
 
 if (!getApps().length) {
