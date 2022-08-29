@@ -7,12 +7,10 @@ import {
   Input,
   Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
   Text,
   useColorModeValue,
-  FormHelperText,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
