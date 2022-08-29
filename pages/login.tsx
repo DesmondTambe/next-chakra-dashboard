@@ -12,6 +12,7 @@ import {
   Text,
   useColorModeValue,
   FormErrorMessage,
+  useToast,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useAuth } from "context/AuthContext";
@@ -32,10 +33,9 @@ const LogInSchema = Yup.object().shape({
 export default function Login() {
   const { login } = useAuth();
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
-  const [formError, setFormError] = useState<string>("");
+
+  const toast = useToast();
 
   return (
     <>
@@ -76,16 +76,28 @@ export default function Login() {
                 setFormSubmitting(true);
                 try {
                   await login(values.email, values.password);
+                  toast({
+                    title: "Login scuccessful",
+                    status: "success",
+                    isClosable: true,
+                    position: "top",
+                  });
                   // redirect to admin dashboard
-                  window.location.href = "/";
+                  // window.location.href = "/";
                 } catch (error: unknown) {
                   let errorMessage = "error.unknown";
                   if (typeof error === "string") {
                     errorMessage = error.toUpperCase();
                   } else if (error instanceof Error) {
                     errorMessage = error.message;
+                    console.log(errorMessage);
+                    toast({
+                      title: "Invalid Email or Password",
+                      status: "error",
+                      isClosable: true,
+                      position: "top",
+                    });
                   }
-                  setFormError(errorMessage);
                   setFormSubmitting(false);
                 }
               }}
@@ -117,7 +129,7 @@ export default function Login() {
                           }
                         >
                           <FormLabel>Password</FormLabel>
-                          <Input type="password" value={password} {...field} />
+                          <Input type="password" {...field} />
                           <FormErrorMessage>
                             {form.errors.password}
                           </FormErrorMessage>

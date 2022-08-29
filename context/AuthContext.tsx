@@ -64,9 +64,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   // useEffect hooks
   useEffect(() => {
-    console.log("Auth Context");
     // function that notifies you if a user is set
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log("current user is set", user);
       setUser(user);
     });
 
@@ -86,61 +86,3 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     </>
   );
 };
-// type authContextType = {
-//   user: boolean;
-//   email: string;
-//   password: string;
-//   isAuthenticated: boolean;
-//   isLoading: boolean;
-//   login: (email: string, password: string) => Promise<UserCredential>;
-//   logout: () => void;
-// };
-
-// const authContextDefaultValues: authContextType = {
-//   user: null,
-//   isAuthenticated: false,
-//   isLoading: false,
-//   // login: (email, password) => Promise<UserCredential>,
-//   login: () => {},
-//   logout: () => {},
-// };
-
-// const AuthContext = createContext<authContextType>(authContextDefaultValues);
-
-// export function useAuth() {
-//   return useContext(AuthContext);
-// }
-
-// type Props = {
-//   children: ReactNode;
-// };
-
-// export function AuthProvider({ children }: Props) {
-//   const [user, setUser] = useState<boolean>(null);
-//   const email = useState<string>("");
-//   const password = useState<string>("");
-
-//   const login = (email: string, password: string) => {
-//     setUser(true);
-//     signInWithEmailAndPassword(auth, email, password);
-//   };
-
-//   const logout = () => {
-//     // return signIn
-//     setUser(false);
-//   };
-
-//   const value = {
-//     user,
-//     email,
-//     password,
-//     login,
-//     logout,
-//   };
-
-//   return (
-//     <>
-//       <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-//     </>
-//   );
-// }
